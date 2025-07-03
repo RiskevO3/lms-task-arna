@@ -22,16 +22,25 @@ A full-stack Learning Management System built with .NET 8 and Blazor Server, fea
 - **Backend**: .NET 8, ASP.NET Core Web API
 - **Frontend**: Blazor Server
 - **Database**: SQLite (for cross-platform compatibility)
-- **Authentication**: Cookie-based authentication
+- **Authentication**: Cookie-based authentication with BCrypt password hashing
 - **ORM**: Entity Framework Core 8.0
+- **Testing**: xUnit with In-Memory Database
+- **Architecture**: Clean Architecture (Repository Pattern)
 
 ## Architecture
 
-The application follows a clean layered architecture:
+The application follows **Clean Architecture** principles with a clear separation of concerns:
 
 ```
-Controllers → Services → Data Layer (EF Core) → Database
+Controllers (API & UI) → Services (Business Logic) → Repositories (Data Access) → Database
 ```
+
+### Clean Layered Architecture
+
+- **Controller Layer**: Handles HTTP requests, authentication, and API responses
+- **Service Layer**: Contains business logic and coordinates between controllers and repositories
+- **Repository Layer**: Manages data access and database operations
+- **Entity Layer**: Domain models and data transfer objects
 
 ## Database Schema
 
@@ -88,14 +97,20 @@ Controllers → Services → Data Layer (EF Core) → Database
    }
    ```
 
-4. **Run the application**
+4. **Run database migrations**
 
    ```bash
    cd lms-arna-task
+   dotnet ef database update
+   ```
+
+5. **Run the application**
+
+   ```bash
    dotnet run
    ```
 
-5. **Access the application**
+6. **Access the application**
    Open your browser and navigate to `http://localhost:5219`
 
 ## Default User Accounts
@@ -245,48 +260,97 @@ dotnet ef database update
 
 ### Testing
 
+Run comprehensive unit tests for the scoring logic:
+
+```bash
+dotnet test
+```
+
+The test suite includes:
+
+- ✅ **8 comprehensive unit tests** for quiz scoring logic
+- ✅ Edge cases (empty answers, non-existent assignments)
+- ✅ Various score scenarios (0%, 20%, 60%, 80%, 100%)
+- ✅ In-memory database testing with realistic data
+
 Basic unit tests can be added for the service layer logic, particularly the scoring algorithm.
 
 ## Project Structure
 
 ```
-lms-arna-task/
-├── Components/
-│   ├── Layout/
-│   │   ├── MainLayout.razor
-│   │   └── NavMenu.razor
-│   └── Pages/
-│       ├── Home.razor
-│       ├── Login.razor
-│       ├── Assignments.razor
-│       ├── AssignmentDetail.razor
-│       └── Report.razor
-├── Controllers/
-│   ├── AuthController.cs
-│   ├── AssignmentController.cs
-│   └── QuizController.cs
-├── Data/
-│   └── ApplicationDbContext.cs
-├── Models/
-│   ├── User.cs
-│   ├── Assignment.cs
-│   ├── Question.cs
-│   ├── AssignmentProgress.cs
-│   ├── UserAnswer.cs
-│   └── ProgressReportDto.cs
-├── Services/
-│   ├── Interfaces/
-│   │   ├── IUserService.cs
-│   │   ├── IAssignmentService.cs
-│   │   └── IQuizService.cs
-│   ├── UserService.cs
-│   ├── AssignmentService.cs
-│   ├── QuizService.cs
-│   └── CustomAuthenticationStateProvider.cs
-└── Program.cs
+lms-task-arna/
+├── lms-arna-task/                    # Main application
+│   ├── Components/
+│   │   ├── Layout/
+│   │   │   ├── MainLayout.razor
+│   │   │   └── NavMenu.razor
+│   │   └── Pages/
+│   │       ├── Home.razor            # Dashboard
+│   │       ├── Login.razor           # Authentication
+│   │       ├── Assignments.razor    # Assignment list
+│   │       ├── AssignmentDetail.razor # Quiz interface
+│   │       ├── Report.razor          # Progress report
+│   │       └── AnswerDetails.razor   # Detailed answer view
+│   ├── Controllers/
+│   │   ├── AuthController.cs         # Authentication API
+│   │   ├── AssignmentController.cs   # Assignment API
+│   │   └── QuizController.cs         # Quiz & progress API
+│   ├── Services/                     # Business logic layer
+│   │   ├── Interfaces/
+│   │   │   ├── IUserService.cs
+│   │   │   ├── IAssignmentService.cs
+│   │   │   └── IQuizService.cs
+│   │   ├── UserService.cs
+│   │   ├── AssignmentService.cs
+│   │   ├── QuizService.cs
+│   │   └── CustomAuthenticationStateProvider.cs
+│   ├── Repositories/                 # Data access layer
+│   │   ├── Interfaces/
+│   │   │   ├── IUserRepository.cs
+│   │   │   ├── IAssignmentRepository.cs
+│   │   │   └── IQuizRepository.cs
+│   │   ├── UserRepository.cs
+│   │   ├── AssignmentRepository.cs
+│   │   └── QuizRepository.cs
+│   ├── Data/
+│   │   └── ApplicationDbContext.cs   # EF Core context
+│   ├── Models/                       # Domain models & DTOs
+│   │   ├── User.cs
+│   │   ├── Assignment.cs
+│   │   ├── Question.cs
+│   │   ├── AssignmentProgress.cs
+│   │   ├── UserAnswer.cs
+│   │   ├── ProgressReportDto.cs
+│   │   ├── UserAnswerDetailsDto.cs
+│   │   └── QuestionDetailDto.cs
+│   ├── Migrations/                   # EF Core migrations
+│   └── Program.cs                    # Application startup
+└── lms-arna-task.Tests/             # Unit tests
+    └── QuizScoringTests.cs          # Comprehensive scoring tests
 ```
 
 ## Recent Improvements
+
+### Clean Architecture Implementation
+
+- **Repository Pattern**: Complete refactoring to implement repository pattern
+- **Dependency Injection**: All services and repositories properly registered
+- **Separation of Concerns**: Clear separation between Controllers, Services, and Repositories
+- **Testability**: Services can now be easily unit tested with mocked repositories
+
+### Unit Testing Suite
+
+- **Comprehensive Test Coverage**: 8 unit tests covering all scoring scenarios
+- **In-Memory Database**: Tests use Entity Framework In-Memory provider
+- **Edge Case Testing**: Tests for empty answers, non-existent assignments, partial answers
+- **Scoring Validation**: Tests verify correct percentage calculations (0%, 20%, 60%, 80%, 100%)
+
+### Enhanced Answer Details
+
+- **Manager-Only Access**: Detailed answer breakdown for completed assignments
+- **Question-by-Question Analysis**: Visual breakdown of correct/incorrect answers
+- **Performance Indicators**: Color-coded feedback for answer accuracy
+- **Navigation Improvements**: Fixed button navigation issues with anchor-based routing
 
 ### Progress Report Enhancements
 
@@ -314,11 +378,14 @@ lms-arna-task/
 - ✅ **Blazor project runs locally** (localhost:5219)
 - ✅ **Clean, functional UI** with Bootstrap styling
 - ✅ **Authentication & Authorization** with role-based access
-- ✅ **Modular CRUD logic** separated into services
-- ✅ **Quiz/Scoring functionality** working correctly
+- ✅ **Clean Architecture** with Repository pattern implementation
+- ✅ **Modular CRUD logic** separated into services and repositories
+- ✅ **Quiz/Scoring functionality** working correctly with comprehensive testing
+- ✅ **Unit Tests** - 8 comprehensive tests for scoring logic (all passing)
 - ✅ **Clean database structure** with proper relationships
 - ✅ **Assignment workflow** complete (view → material → quiz → submit)
-- ✅ **Manager reporting** with progress tracking
+- ✅ **Manager reporting** with progress tracking and detailed answer analysis
+- ✅ **Git Repository** initialized with comprehensive .gitignore
 
 ## License
 

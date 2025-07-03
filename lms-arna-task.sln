@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lms-arna-task", "lms-arna-task\lms-arna-task.csproj", "{CC0DE2BC-8CF8-4876-ACC8-5655BBBDEF89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lms-arna-task.Tests", "lms-arna-task.Tests\lms-arna-task.Tests.csproj", "{E82409BF-F745-4109-ADBC-9F32EE7E6BF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{CC0DE2BC-8CF8-4876-ACC8-5655BBBDEF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC0DE2BC-8CF8-4876-ACC8-5655BBBDEF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC0DE2BC-8CF8-4876-ACC8-5655BBBDEF89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E82409BF-F745-4109-ADBC-9F32EE7E6BF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E82409BF-F745-4109-ADBC-9F32EE7E6BF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E82409BF-F745-4109-ADBC-9F32EE7E6BF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E82409BF-F745-4109-ADBC-9F32EE7E6BF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
