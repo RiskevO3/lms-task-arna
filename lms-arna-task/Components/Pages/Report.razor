@@ -1,0 +1,264 @@
+@page "/report"
+@using System.Text.Json
+@using lms_arna_task.Models
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2>Progress Report</h2>
+            <hr />
+        </div>
+    </div>
+
+
+
+    @if (isLoading)
+    {
+        <div class="text-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Loading progress report...</p>
+        </div>
+    }
+    else if (progressList == null || !progressList.Any())
+    {
+        <div class="alert alert-info">
+            <h4>No Progress Data</h4>
+            <p>No assignment progress data found for your team members.</p>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5>Team Assignment Progress</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Assignment</th>
+                                <th>Status</th>
+                                <th>Score</th>
+                                <th>Started</th>
+                                <th>Completed</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var progress in progressList.OrderByDescending(p => p.UpdatedAt))
+                            {
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <strong>@progress.Username</strong>
+                                            <br />
+                                            <small class="text-muted">@progress.Email</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>@progress.AssignmentTitle</strong>
+                                            <br />
+                                            <small class="text-muted">@progress.AssignmentDescription</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if (progress.IsCompleted)
+                                        {
+                                            <span class="badge bg-success">Completed</span>
+                                        }
+                                        else if (progress.StartedAt > DateTime.MinValue)
+                                        {
+                                            <span class="badge bg-warning">In Progress</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Not Started</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (progress.IsCompleted)
+                                        {
+                                            <span class="fw-bold">@progress.Score%</span>
+                                            @if (progress.Score >= 80)
+                                            {
+                                                <span class="text-success ms-1">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </span>
+                                            }
+                                            else if (progress.Score >= 60)
+                                            {
+                                                <span class="text-warning ms-1">
+                                                    <i class="bi bi-dash-circle"></i>
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-danger ms-1">
+                                                    <i class="bi bi-x-circle"></i>
+                                                </span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (progress.StartedAt > DateTime.MinValue)
+                                        {
+                                            <small>@progress.StartedAt.ToString("MMM dd, yyyy HH:mm")</small>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (progress.CompletedAt.HasValue)
+                                        {
+                                            <small>@progress.CompletedAt.Value.ToString("MMM dd, yyyy HH:mm")</small>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                    <td>
+                        @if (progress.IsCompleted)
+                        {
+                            <a href="/report/details/@progress.UserId/@progress.AssignmentId" 
+                               class="btn btn-sm btn-outline-primary" 
+                               style="min-width: 80px;"
+                               title="View detailed quiz answers">
+                                <i class="bi bi-eye"></i>
+                                <span>View</span>
+                            </a>
+                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        @if (progressList.Any())
+        {
+            <div class="row mt-4">
+                <div class="col-md-2 col-6">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">@progressList.Count(p => p.IsCompleted)</h4>
+                            <p class="card-text">Completed</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">@progressList.Count(p => !p.IsCompleted && p.StartedAt > DateTime.MinValue)
+                            </h4>
+                            <p class="card-text">In Progress</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">@progressList.Count(p => p.StartedAt <= DateTime.MinValue)</h4>
+                            <p class="card-text">Not Started</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">@(progressList.Where(p => p.IsCompleted).Any() ? progressList.Where(p =>
+                                                        p.IsCompleted).Average(p => p.Score).ToString("F1") : "0")%</h4>
+                            <p class="card-text">Average Score</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">@progressList.Count(p => p.IsCompleted && p.Score >= 80)</h4>
+                            <p class="card-text">High Performers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    private List<ProgressReportDto>? progressList;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProgressReport();
+    }
+
+    private async Task LoadProgressReport()
+    {
+        try
+        {
+            isLoading = true;
+            var response = await Http.GetAsync("/api/quiz/report");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Raw API response: {content}");
+
+                progressList = JsonSerializer.Deserialize<List<ProgressReportDto>>(content, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+                Console.WriteLine($"Deserialized count: {progressList?.Count ?? 0}");
+
+                if (progressList != null)
+                {
+                    Console.WriteLine($"Users in progress list: {string.Join(", ", progressList.Select(p => p.Username ?? "Unknown"))}");
+                }
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                Navigation.NavigateTo("/login");
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            {
+                // User is not a manager
+                Navigation.NavigateTo("/");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading progress report: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void NavigateToDetails(int userId, int assignmentId)
+    {
+        Navigation.NavigateTo($"/report/details/{userId}/{assignmentId}");
+    }
+}

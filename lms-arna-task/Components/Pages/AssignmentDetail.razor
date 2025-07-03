@@ -1,0 +1,403 @@
+@page "/assignment/{assignmentId:int}"
+@rendermode InteractiveServer
+@using lms_arna_task.Models
+@using lms_arna_task.Services.Interfaces
+@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims
+@attribute [Authorize]
+@inject IAssignmentService AssignmentService
+@inject IQuizService QuizService
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthStateProvider
+
+<div class="container mt-4">
+    @if (isLoading)
+    {
+        <div class="text-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Loading assignment...</p>
+        </div>
+    }
+    else if (assignment == null)
+    {
+        <div class="alert alert-danger">
+            <h4>Assignment Not Found</h4>
+            <p>The requested assignment could not be found.</p>
+            <a href="/assignments" class="btn btn-secondary">Back to Assignments</a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/assignments">Assignments</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@assignment.Title</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3>@assignment.Title</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>@assignment.Description</p>
+                        <div class="mb-3">
+                            <h5>Learning Material</h5>
+                            @if (assignment.MaterialType == "PDF")
+                            {
+                                <div class="alert alert-info">
+                                    <i class="bi bi-file-pdf"></i>
+                                    <a href="@assignment.MaterialContent" target="_blank" class="ms-2">
+                                        View PDF Material
+                                    </a>
+                                </div>
+                            }
+                            else if (assignment.MaterialType == "Video")
+                            {
+                                <div class="alert alert-info">
+                                    <i class="bi bi-play-circle"></i>
+                                    <a href="@assignment.MaterialContent" target="_blank" class="ms-2">
+                                        Watch Video Material
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info">
+                                    <i class="bi bi-file-text"></i>
+                                    <span class="ms-2">@assignment.MaterialContent</span>
+                                </div>
+                            }
+                        </div>
+                        
+                        <div class="mb-3">
+                            <small class="text-muted">
+                                <i class="bi bi-calendar"></i> Due: @assignment.EndDate.ToString("MMMM dd, yyyy HH:mm")
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                @if (assignment.Questions != null && assignment.Questions.Any())
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Quiz Questions</h4>
+                            @if (isCompleted)
+                            {
+                                <span class="badge bg-success">Completed</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning">Pending</span>
+                            }
+                        </div>
+                        <div class="card-body">
+                            @if (isManager)
+                            {
+                                <div class="alert alert-info">
+                                    <h5><i class="bi bi-eye"></i> Manager View</h5>
+                                    <p>You are viewing this assignment as a manager. The correct answers are highlighted below.</p>
+                                </div>
+                                
+                                @foreach (var question in assignment.Questions.OrderBy(q => q.Id))
+                                {
+                                    <div class="mb-4">
+                                        <h6>@question.QuestionText</h6>
+                                        <div class="form-check @(question.CorrectAnswer == "A" ? "bg-success bg-opacity-25 border border-success rounded p-2" : "")">
+                                            <input class="form-check-input" type="radio" name="question_@question.Id" 
+                                                   value="A" disabled="true" checked="@(question.CorrectAnswer == "A")" />
+                                            <label class="form-check-label">
+                                                A. @question.OptionA
+                                                @if (question.CorrectAnswer == "A")
+                                                {
+                                                    <span class="badge bg-success ms-2">Correct Answer</span>
+                                                }
+                                            </label>
+                                        </div>
+                                        <div class="form-check @(question.CorrectAnswer == "B" ? "bg-success bg-opacity-25 border border-success rounded p-2" : "")">
+                                            <input class="form-check-input" type="radio" name="question_@question.Id" 
+                                                   value="B" disabled="true" checked="@(question.CorrectAnswer == "B")" />
+                                            <label class="form-check-label">
+                                                B. @question.OptionB
+                                                @if (question.CorrectAnswer == "B")
+                                                {
+                                                    <span class="badge bg-success ms-2">Correct Answer</span>
+                                                }
+                                            </label>
+                                        </div>
+                                        <div class="form-check @(question.CorrectAnswer == "C" ? "bg-success bg-opacity-25 border border-success rounded p-2" : "")">
+                                            <input class="form-check-input" type="radio" name="question_@question.Id" 
+                                                   value="C" disabled="true" checked="@(question.CorrectAnswer == "C")" />
+                                            <label class="form-check-label">
+                                                C. @question.OptionC
+                                                @if (question.CorrectAnswer == "C")
+                                                {
+                                                    <span class="badge bg-success ms-2">Correct Answer</span>
+                                                }
+                                            </label>
+                                        </div>
+                                        <div class="form-check @(question.CorrectAnswer == "D" ? "bg-success bg-opacity-25 border border-success rounded p-2" : "")">
+                                            <input class="form-check-input" type="radio" name="question_@question.Id" 
+                                                   value="D" disabled="true" checked="@(question.CorrectAnswer == "D")" />
+                                            <label class="form-check-label">
+                                                D. @question.OptionD
+                                                @if (question.CorrectAnswer == "D")
+                                                {
+                                                    <span class="badge bg-success ms-2">Correct Answer</span>
+                                                }
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else if (isCompleted)
+                            {
+                                <div class="alert alert-success">
+                                    <h5>Quiz Completed!</h5>
+                                    <p>You have already completed this quiz. Your score: <strong>@(progress?.Score ?? 0)%</strong></p>
+                                </div>
+                            }
+                            else
+                            {
+                                <EditForm Model="quizAnswers" OnValidSubmit="SubmitQuiz">
+                                    @foreach (var question in assignment.Questions.OrderBy(q => q.Id))
+                                    {
+                                        <div class="mb-4">
+                                            <h6>@question.QuestionText</h6>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="question_@question.Id" 
+                                                       value="A" @onchange="@((ChangeEventArgs e) => UpdateAnswer(question.Id, e.Value?.ToString() ?? ""))" />
+                                                <label class="form-check-label">
+                                                    A. @question.OptionA
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="question_@question.Id" 
+                                                       value="B" @onchange="@((ChangeEventArgs e) => UpdateAnswer(question.Id, e.Value?.ToString() ?? ""))" />
+                                                <label class="form-check-label">
+                                                    B. @question.OptionB
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="question_@question.Id" 
+                                                       value="C" @onchange="@((ChangeEventArgs e) => UpdateAnswer(question.Id, e.Value?.ToString() ?? ""))" />
+                                                <label class="form-check-label">
+                                                    C. @question.OptionC
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="question_@question.Id" 
+                                                       value="D" @onchange="@((ChangeEventArgs e) => UpdateAnswer(question.Id, e.Value?.ToString() ?? ""))" />
+                                                <label class="form-check-label">
+                                                    D. @question.OptionD
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                    
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-success" disabled="@(isSubmitting || !AllQuestionsAnswered())">
+                                            @if (isSubmitting)
+                                            {
+                                                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                                <span>Submitting...</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Submit Quiz</span>
+                                            }
+                                        </button>
+                                    </div>
+                                </EditForm>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Assignment Info</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-2">
+                            <strong>Start Date:</strong><br />
+                            <small>@assignment.StartDate.ToString("MMMM dd, yyyy")</small>
+                        </div>
+                        <div class="mb-2">
+                            <strong>End Date:</strong><br />
+                            <small>@assignment.EndDate.ToString("MMMM dd, yyyy")</small>
+                        </div>
+                        <div class="mb-2">
+                            <strong>Questions:</strong><br />
+                            <small>@(assignment.Questions?.Count ?? 0) questions</small>
+                        </div>
+                        <div class="mb-2">
+                            <strong>Status:</strong><br />
+                            @if (isManager)
+                            {
+                                <span class="badge bg-info">Manager View</span>
+                            }
+                            else if (isCompleted)
+                            {
+                                <span class="badge bg-success">Completed</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning">In Progress</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public int AssignmentId { get; set; }
+    
+    private Assignment? assignment;
+    private AssignmentProgress? progress;
+    private Dictionary<int, string> quizAnswers = new();
+    private bool isLoading = true;
+    private bool isSubmitting = false;
+    private bool isCompleted = false;
+    private int currentUserId;
+    private string currentUserRole = "";
+    private bool isManager = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetCurrentUser();
+        await LoadAssignment();
+        await CheckCompletion();
+    }
+
+    private async Task GetCurrentUser()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        if (authState.User.Identity?.IsAuthenticated == true)
+        {
+            var userIdClaim = authState.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+            {
+                currentUserId = userId;
+            }
+            
+            var roleClaim = authState.User.FindFirst(ClaimTypes.Role);
+            if (roleClaim != null)
+            {
+                currentUserRole = roleClaim.Value;
+                isManager = currentUserRole == "Manager";
+            }
+        }
+    }
+
+    private async Task LoadAssignment()
+    {
+        try
+        {
+            isLoading = true;
+            assignment = await AssignmentService.GetAssignmentWithQuestionsAsync(AssignmentId);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading assignment: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task CheckCompletion()
+    {
+        try
+        {
+            // Managers don't need to check completion since they can't submit quizzes
+            if (currentUserId > 0 && !isManager)
+            {
+                isCompleted = await QuizService.HasUserCompletedAssignmentAsync(currentUserId, AssignmentId);
+                
+                if (isCompleted)
+                {
+                    await LoadProgress();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error checking completion: {ex.Message}");
+        }
+    }
+
+    private async Task LoadProgress()
+    {
+        try
+        {
+            if (currentUserId > 0)
+            {
+                progress = await QuizService.GetUserProgressAsync(currentUserId, AssignmentId);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading progress: {ex.Message}");
+        }
+    }
+
+    private void UpdateAnswer(int questionId, string selectedAnswer)
+    {
+        quizAnswers[questionId] = selectedAnswer;
+    }
+
+    private bool AllQuestionsAnswered()
+    {
+        if (assignment?.Questions == null) return false;
+        
+        foreach (var question in assignment.Questions)
+        {
+            if (!quizAnswers.ContainsKey(question.Id) || string.IsNullOrEmpty(quizAnswers[question.Id]))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private async Task SubmitQuiz()
+    {
+        if (isSubmitting || !AllQuestionsAnswered() || currentUserId == 0) return;
+
+        isSubmitting = true;
+        
+        try
+        {
+            await QuizService.SubmitAnswersAsync(currentUserId, AssignmentId, quizAnswers);
+            
+            // Show success message - using simple state instead of JavaScript
+            await CheckCompletion();
+            StateHasChanged(); // Refresh the UI
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error submitting quiz: {ex.Message}");
+            // Handle error - could set an error message state variable
+        }
+        finally
+        {
+            isSubmitting = false;
+        }
+    }
+}

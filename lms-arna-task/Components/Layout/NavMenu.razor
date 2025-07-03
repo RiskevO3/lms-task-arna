@@ -1,0 +1,85 @@
+﻿@using System.Text.Json
+@using Microsoft.AspNetCore.Components.Authorization
+@using lms_arna_task.Services
+@inject NavigationManager Navigation
+
+<AuthorizeView>
+    <Authorized>
+        <div class="top-row ps-3 navbar navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="">LMS Arna Task</a>
+                <span class="navbar-text text-white d-none d-md-inline">
+                    Welcome, @context.User.Identity?.Name
+                    (@context.User.FindFirst("http://schemas.microsoft.com/ws/2008/06/identity/claims/role")?.Value)
+                </span>
+                <span class="navbar-text text-white d-inline d-md-none">
+                    @context.User.Identity?.Name
+                </span>
+            </div>
+        </div>
+
+        <input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+        <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+            <nav class="flex-column">
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                        <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="assignments">
+                        <span class="bi bi-list-task-nav-menu" aria-hidden="true"></span> Assignments
+                    </NavLink>
+                </div>
+
+                @if (context.User.IsInRole("Manager"))
+                {
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="report">
+                            <span class="bi bi-bar-chart-nav-menu" aria-hidden="true"></span> Progress Report
+                        </NavLink>
+                    </div>
+                }
+
+                <div class="nav-item px-3">
+                    <form method="post" action="/api/auth/logout" class="d-inline">
+                        <button type="submit" class="nav-link btn btn-link text-start">
+                            <span class="bi bi-box-arrow-right-nav-menu" aria-hidden="true"></span> Logout
+                        </button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="top-row ps-3 navbar navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="">LMS Arna Task</a>
+            </div>
+        </div>
+
+        <input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+        <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+            <nav class="flex-column">
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                        <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="login">
+                        <span class="bi bi-box-arrow-in-right-nav-menu" aria-hidden="true"></span> Login
+                    </NavLink>
+                </div>
+            </nav>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    // No code needed - logout is handled by form submission
+}

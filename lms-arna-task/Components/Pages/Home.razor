@@ -1,0 +1,293 @@
+﻿@page "/"
+@using System.Text.Json
+@using lms_arna_task.Models
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<div class="container mt-4">
+    @if (isLoading)
+    {
+        <div class="text-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else if (currentUser == null)
+    {
+        <div class="hero-section text-center mb-5">
+            <h1 class="display-4">Welcome to LMS Arna Task</h1>
+            <p class="lead">Your Learning Management System for assignments and knowledge checks</p>
+            <a href="/login" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <h4>Welcome back, @currentUser.Username!</h4>
+                    <p>You are logged in as a <strong>@currentUser.Role</strong>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @if (currentUser.Role == "Learner")
+            {
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="bi bi-list-task"></i> View Assignments
+                            </h5>
+                            <p class="card-text">Browse and complete your active assignments.</p>
+                            <a href="/assignments" class="btn btn-primary">View Assignments</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="bi bi-clipboard-check"></i> My Progress
+                            </h5>
+                            <p class="card-text">Track your learning progress and scores.</p>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (currentUser.Role == "Manager")
+            {
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="bi bi-bar-chart"></i> Progress Report
+                            </h5>
+                            <p class="card-text">View your team's assignment progress and performance.</p>
+                            <a href="/report" class="btn btn-primary">View Reports</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="bi bi-list-task"></i> All Assignments
+                            </h5>
+                            <p class="card-text">View all available assignments.</p>
+                            <a href="/assignments" class="btn btn-primary">View Assignments</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Quick Stats</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4>@pendingCount</h4>
+                                    <p class="text-muted">Active Assignments</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4>@completedCount</h4>
+                                    <p class="text-muted">Completed</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4>@assignmentCount</h4>
+                                    <p class="text-muted">Total Assignments</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4>@(avgScore > 0 ? avgScore.ToString("F1") + "%" : "N/A")</h4>
+                                    <p class="text-muted">Average Score</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .hero-section {
+        padding: 60px 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 15px;
+        margin-bottom: 30px;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+
+@code {
+    private User? currentUser;
+    private bool isLoading = true;
+    private int assignmentCount = 0;
+    private int completedCount = 0;
+    private int pendingCount = 0;
+    private double avgScore = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCurrentUser();
+        if (currentUser != null)
+        {
+            await LoadStats();
+        }
+    }
+
+    private async Task LoadCurrentUser()
+    {
+        try
+        {
+            var response = await Http.GetAsync("/api/auth/me");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                currentUser = JsonSerializer.Deserialize<User>(content, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading current user: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task LoadStats()
+    {
+        try
+        {
+            Console.WriteLine("LoadStats: Starting to load stats");
+            
+            // Load assignments count
+            var assignmentsResponse = await Http.GetAsync("/api/assignment");
+            if (assignmentsResponse.IsSuccessStatusCode)
+            {
+                var content = await assignmentsResponse.Content.ReadAsStringAsync();
+                var assignments = JsonSerializer.Deserialize<List<Assignment>>(content, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+                assignmentCount = assignments?.Count ?? 0;
+                Console.WriteLine($"LoadStats: assignmentCount = {assignmentCount}");
+            }
+
+            // Load progress stats based on role
+            if (currentUser?.Role == "Manager")
+            {
+                Console.WriteLine("LoadStats: Loading manager stats");
+                var reportResponse = await Http.GetAsync("/api/quiz/report");
+                if (reportResponse.IsSuccessStatusCode)
+                {
+                    var content = await reportResponse.Content.ReadAsStringAsync();
+                    var progressList = JsonSerializer.Deserialize<List<AssignmentProgress>>(content, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    if (progressList != null)
+                    {
+                        completedCount = progressList.Count(p => p.IsCompleted);
+                        pendingCount = progressList.Count(p => !p.IsCompleted);
+                        var completedWithScores = progressList.Where(p => p.IsCompleted).ToList();
+                        avgScore = completedWithScores.Any() ? completedWithScores.Average(p => p.Score) : 0;
+                        Console.WriteLine($"LoadStats: Manager stats - completed: {completedCount}, pending: {pendingCount}, avgScore: {avgScore}");
+                    }
+                }
+            }
+            else if (currentUser?.Role == "Learner")
+            {
+                Console.WriteLine($"LoadStats: Loading learner stats for user ID: {currentUser.Id}");
+                // For learners, get their personal progress
+                var progressResponse = await Http.GetAsync($"/api/quiz/progress/user/{currentUser.Id}");
+                Console.WriteLine($"LoadStats: Progress API response status: {progressResponse.StatusCode}");
+                if (progressResponse.IsSuccessStatusCode)
+                {
+                    var content = await progressResponse.Content.ReadAsStringAsync();
+                    Console.WriteLine($"LoadStats: Progress API response content length: {content?.Length ?? 0}");
+                    if (!string.IsNullOrEmpty(content))
+                    {
+                        var userProgressList = JsonSerializer.Deserialize<List<AssignmentProgress>>(content, new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true
+                        });
+
+                        if (userProgressList != null)
+                        {
+                            Console.WriteLine($"LoadStats: userProgressList count: {userProgressList.Count}");
+                            completedCount = userProgressList.Count(p => p.IsCompleted);
+                            pendingCount = assignmentCount - completedCount; // Total assignments minus completed
+                            var completedWithScores = userProgressList.Where(p => p.IsCompleted).ToList();
+                            avgScore = completedWithScores.Any() ? completedWithScores.Average(p => p.Score) : 0;
+                            Console.WriteLine($"LoadStats: Learner stats - completed: {completedCount}, pending: {pendingCount}, avgScore: {avgScore}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("LoadStats: userProgressList is null after deserialization");
+                            // If no progress data, all assignments are pending
+                            completedCount = 0;
+                            pendingCount = assignmentCount;
+                            avgScore = 0;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("LoadStats: Progress API response content is empty");
+                        // If no progress data, all assignments are pending
+                        completedCount = 0;
+                        pendingCount = assignmentCount;
+                        avgScore = 0;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"LoadStats: Progress API call failed with status: {progressResponse.StatusCode}");
+                    // If API call fails, all assignments are pending
+                    completedCount = 0;
+                    pendingCount = assignmentCount;
+                    avgScore = 0;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading stats: {ex.Message}");
+        }
+    }
+}

@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/rizqi/Documents/Github Repo/self-project/lms-task-arna/lms-arna-task/obj/Release/net8.0/scopedcss/projectbundle/lms-arna-task.bundle.scp.css",
+      "PackagePath": "staticwebassets/lms-arna-task.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/rizqi/Documents/Github Repo/self-project/lms-task-arna/lms-arna-task/wwwroot/app.css",
+      "PackagePath": "staticwebassets/app.css"
+    },
+    {
+      "Id": "/Users/rizqi/Documents/Github Repo/self-project/lms-task-arna/lms-arna-task/wwwroot/bootstrap/bootstrap.min.css",
+      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/rizqi/Documents/Github Repo/self-project/lms-task-arna/lms-arna-task/wwwroot/bootstrap/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/rizqi/Documents/Github Repo/self-project/lms-task-arna/lms-arna-task/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "/Users/rizqi/Documents/Github Repo/self-project/lms-task-arna/lms-arna-task/wwwroot/js/auth.js",
+      "PackagePath": "staticwebassets/js/auth.js"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.build.lms-arna-task.props",
+      "PackagePath": "build\\lms-arna-task.props"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.buildMultiTargeting.lms-arna-task.props",
+      "PackagePath": "buildMultiTargeting\\lms-arna-task.props"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.buildTransitive.lms-arna-task.props",
+      "PackagePath": "buildTransitive\\lms-arna-task.props"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.lms-arna-task.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

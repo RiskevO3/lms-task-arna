@@ -1,0 +1,25 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/js/lib
+
+# production
+/build
+/dist
+/bin
+/obj
+/log
+
+# secrets
+appsettings.Development.json
+secrets.json
+
+# user files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# other
+/lms-arna-task.db

@@ -1,0 +1,100 @@
+@page "/assignments"
+@rendermode InteractiveServer
+@using lms_arna_task.Models
+@using lms_arna_task.Services.Interfaces
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inject IAssignmentService AssignmentService
+@inject NavigationManager Navigation
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2>Active Assignments</h2>
+            <hr />
+        </div>
+    </div>
+
+    @if (isLoading)
+    {
+        <div class="text-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Loading assignments...</p>
+        </div>
+    }
+    else if (assignmentList == null || !assignmentList.Any())
+    {
+        <div class="alert alert-info">
+            <h4>No Active Assignments</h4>
+            <p>There are no active assignments at this time.</p>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var assignment in assignmentList)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@assignment.Title</h5>
+                            <p class="card-text">@assignment.Description</p>
+                            <div class="mb-2">
+                                <small class="text-muted">
+                                    <i class="bi bi-calendar"></i> Due: @assignment.EndDate.ToString("MMM dd, yyyy")
+                                </small>
+                            </div>
+                            <div class="mb-2">
+                                <small class="text-muted">
+                                    <i class="bi bi-file-earmark"></i> Material: @assignment.MaterialType
+                                </small>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary w-100" @onclick="() => ViewAssignment(assignment.Id)"
+                                @onclick:preventDefault="false">
+                                <i class="bi bi-eye"></i> View Assignment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<Assignment>? assignmentList;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAssignments();
+    }
+
+    private async Task LoadAssignments()
+    {
+        try
+        {
+            isLoading = true;
+            assignmentList = await AssignmentService.GetActiveAssignmentsAsync();
+        }
+        catch (Exception ex)
+        {
+            // Handle error
+            Console.WriteLine($"Error loading assignments: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void ViewAssignment(int assignmentId)
+    {
+        Console.WriteLine($"ViewAssignment called with ID: {assignmentId}");
+        Navigation.NavigateTo($"/assignment/{assignmentId}");
+    }
+}

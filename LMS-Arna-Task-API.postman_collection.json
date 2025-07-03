@@ -1,0 +1,219 @@
+{
+  "info": {
+    "name": "LMS Arna Task API",
+    "description": "API Collection for LMS Arna Task - Assignment & Quiz Management System with Progress Tracking",
+    "version": "2.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"manager\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "me"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "logout"]
+            }
+          }
+        },
+        {
+          "name": "Login as Learner",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"learner1\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assignments",
+      "item": [
+        {
+          "name": "Get Active Assignments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/assignment",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "assignment"]
+            }
+          }
+        },
+        {
+          "name": "Get Assignment by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/assignment/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "assignment", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Assignment with Questions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/assignment/1/with-questions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "assignment", "1", "with-questions"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Quiz",
+      "item": [
+        {
+          "name": "Get Progress",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/quiz/progress/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quiz", "progress", "1"]
+            }
+          }
+        },
+        {
+          "name": "Start Assignment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/quiz/start/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quiz", "start", "1"]
+            }
+          }
+        },
+        {
+          "name": "Submit Quiz Answers",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"1\": \"B\",\n  \"2\": \"D\",\n  \"3\": \"B\",\n  \"4\": \"A\",\n  \"5\": \"C\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/quiz/submit/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quiz", "submit", "1"]
+            }
+          }
+        },
+        {
+          "name": "Check Completion",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/quiz/check-completion/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quiz", "check-completion", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Progress Report (Manager Only)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/quiz/report",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "quiz", "report"]
+            }
+          },
+          "response": [
+            {
+              "name": "Progress Report Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/quiz/report",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "quiz", "report"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "[\n  {\n    \"id\": 1,\n    \"userId\": 3,\n    \"username\": \"learner2\",\n    \"email\": \"learner2@example.com\",\n    \"assignmentId\": 1,\n    \"assignmentTitle\": \"Introduction to Programming\",\n    \"assignmentDescription\": \"Learn the basics of programming concepts\",\n    \"score\": 100,\n    \"isCompleted\": true,\n    \"completedAt\": \"2025-06-29T00:11:10.204245\",\n    \"startedAt\": \"2025-06-28T23:33:10.204245\",\n    \"updatedAt\": \"2025-06-29T00:11:10.204245\"\n  },\n  {\n    \"id\": 0,\n    \"userId\": 2,\n    \"username\": \"learner1\",\n    \"email\": \"learner1@example.com\",\n    \"assignmentId\": 1,\n    \"assignmentTitle\": \"Introduction to Programming\",\n    \"assignmentDescription\": \"Learn the basics of programming concepts\",\n    \"score\": 0,\n    \"isCompleted\": false,\n    \"completedAt\": null,\n    \"startedAt\": \"0001-01-01T00:00:00\",\n    \"updatedAt\": \"0001-01-01T00:00:00\"\n  }\n]"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5219"
+    }
+  ]
+}
