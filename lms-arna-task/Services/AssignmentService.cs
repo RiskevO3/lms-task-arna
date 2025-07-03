@@ -1,69 +1,46 @@
-using Microsoft.EntityFrameworkCore;
-using lms_arna_task.Data;
 using lms_arna_task.Models;
 using lms_arna_task.Services.Interfaces;
+using lms_arna_task.Repositories.Interfaces;
 
 namespace lms_arna_task.Services
 {
     public class AssignmentService : IAssignmentService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IAssignmentRepository _assignmentRepository;
 
-        public AssignmentService(ApplicationDbContext context)
+        public AssignmentService(IAssignmentRepository assignmentRepository)
         {
-            _context = context;
+            _assignmentRepository = assignmentRepository;
         }
 
         public async Task<List<Assignment>> GetActiveAssignmentsAsync()
         {
-            return await _context.Assignments
-                .Where(a => a.IsActive && a.StartDate <= DateTime.UtcNow && a.EndDate >= DateTime.UtcNow)
-                .Include(a => a.CreatedBy)
-                .OrderBy(a => a.StartDate)
-                .ToListAsync();
+            return await _assignmentRepository.GetActiveAssignmentsAsync();
         }
 
         public async Task<Assignment?> GetAssignmentByIdAsync(int id)
         {
-            return await _context.Assignments
-                .Include(a => a.CreatedBy)
-                .FirstOrDefaultAsync(a => a.Id == id);
+            return await _assignmentRepository.GetByIdAsync(id);
         }
 
         public async Task<Assignment?> GetAssignmentWithQuestionsAsync(int id)
         {
-            return await _context.Assignments
-                .Include(a => a.Questions)
-                .Include(a => a.CreatedBy)
-                .FirstOrDefaultAsync(a => a.Id == id);
+            return await _assignmentRepository.GetAssignmentWithQuestionsAsync(id);
         }
 
         public async Task<Assignment> CreateAssignmentAsync(Assignment assignment)
         {
-            assignment.CreatedAt = DateTime.UtcNow;
-            assignment.UpdatedAt = DateTime.UtcNow;
-
-            _context.Assignments.Add(assignment);
-            await _context.SaveChangesAsync();
-            return assignment;
+            return await _assignmentRepository.CreateAssignmentAsync(assignment);
         }
 
         public async Task<Assignment> UpdateAssignmentAsync(Assignment assignment)
         {
-            assignment.UpdatedAt = DateTime.UtcNow;
-            _context.Assignments.Update(assignment);
-            await _context.SaveChangesAsync();
-            return assignment;
+            return await _assignmentRepository.UpdateAssignmentAsync(assignment);
         }
 
         public async Task<bool> DeleteAssignmentAsync(int id)
         {
-            var assignment = await _context.Assignments.FindAsync(id);
-            if (assignment == null) return false;
-
-            _context.Assignments.Remove(assignment);
-            await _context.SaveChangesAsync();
-            return true;
+            return await _assignmentRepository.DeleteAssignmentAsync(id);
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("lms-arna-task")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+edae5202efe82118067a2c27f5dc1e0c70c4f434")]
 [assembly: System.Reflection.AssemblyProductAttribute("lms-arna-task")]
 [assembly: System.Reflection.AssemblyTitleAttribute("lms-arna-task")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

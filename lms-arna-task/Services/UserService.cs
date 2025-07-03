@@ -1,23 +1,21 @@
-using Microsoft.EntityFrameworkCore;
-using lms_arna_task.Data;
 using lms_arna_task.Models;
+using lms_arna_task.Repositories.Interfaces;
 using lms_arna_task.Services.Interfaces;
 
 namespace lms_arna_task.Services
 {
     public class UserService : IUserService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(ApplicationDbContext context)
+        public UserService(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         public async Task<User?> AuthenticateAsync(string username, string password)
         {
-            var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Username == username);
+            var user = await _userRepository.GetUserByUsernameAsync(username);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
             {
@@ -29,23 +27,17 @@ namespace lms_arna_task.Services
 
         public async Task<User?> GetUserByIdAsync(int id)
         {
-            return await _context.Users
-                .Include(u => u.Manager)
-                .Include(u => u.Subordinates)
-                .FirstOrDefaultAsync(u => u.Id == id);
+            return await _userRepository.GetUserByIdAsync(id);
         }
 
         public async Task<User?> GetUserByUsernameAsync(string username)
         {
-            return await _context.Users
-                .FirstOrDefaultAsync(u => u.Username == username);
+            return await _userRepository.GetUserByUsernameAsync(username);
         }
 
         public async Task<List<User>> GetSubordinatesAsync(int managerId)
         {
-            return await _context.Users
-                .Where(u => u.ManagerId == managerId)
-                .ToListAsync();
+            return await _userRepository.GetSubordinatesAsync(managerId);
         }
 
         public async Task<User> CreateUserAsync(User user)
@@ -54,27 +46,18 @@ namespace lms_arna_task.Services
             user.CreatedAt = DateTime.UtcNow;
             user.UpdatedAt = DateTime.UtcNow;
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            return user;
+            return await _userRepository.AddUserAsync(user);
         }
 
         public async Task<User> UpdateUserAsync(User user)
         {
             user.UpdatedAt = DateTime.UtcNow;
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
-            return user;
+            return await _userRepository.UpdateUserAsync(user);
         }
 
         public async Task<bool> DeleteUserAsync(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null) return false;
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return true;
+            return await _userRepository.DeleteUserAsync(id);
         }
     }
 }

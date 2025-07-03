@@ -2,6 +2,8 @@ using lms_arna_task.Components;
 using lms_arna_task.Data;
 using lms_arna_task.Services;
 using lms_arna_task.Services.Interfaces;
+using lms_arna_task.Repositories;
+using lms_arna_task.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -48,6 +50,11 @@ builder.Services.AddControllers()
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 builder.Services.AddScoped<IQuizService, QuizService>();
+
+// Add Repositories
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
+builder.Services.AddScoped<IQuizRepository, QuizRepository>();
 
 // Add HttpClient for API calls from Blazor components
 builder.Services.AddScoped(sp =>
