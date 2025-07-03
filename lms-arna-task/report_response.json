@@ -12,9 +12,7 @@
       "manager": null,
       "subordinates": [],
       "createdAssignments": [],
-      "assignmentProgresses": [
-        null
-      ],
+      "assignmentProgresses": [null],
       "createdAt": "2025-07-03T07:33:09.94202",
       "updatedAt": "2025-07-03T07:33:09.94202"
     },
@@ -23,7 +21,7 @@
       "id": 1,
       "title": "Introduction to Programming",
       "description": "Learn the basics of programming concepts",
-      "materialContent": "https://example.com/programming-basics.pdf",
+      "materialContent": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
       "materialType": "PDF",
       "startDate": "2025-06-26T07:33:10.204222",
       "endDate": "2025-07-10T07:33:10.204224",
@@ -45,9 +43,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.154545",
             "updatedAt": "2025-07-03T07:33:09.154545"
           },
@@ -73,9 +69,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.287626",
             "updatedAt": "2025-07-03T07:33:09.287626"
           },
@@ -101,9 +95,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.41854",
             "updatedAt": "2025-07-03T07:33:09.41854"
           },
@@ -129,9 +121,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.549038",
             "updatedAt": "2025-07-03T07:33:09.549038"
           },
@@ -157,9 +147,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.680531",
             "updatedAt": "2025-07-03T07:33:09.680531"
           },
@@ -186,9 +174,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:10.20412",
             "updatedAt": "2025-07-03T07:33:10.20412"
           },
@@ -225,9 +211,7 @@
       "manager": null,
       "subordinates": [],
       "createdAssignments": [],
-      "assignmentProgresses": [
-        null
-      ],
+      "assignmentProgresses": [null],
       "createdAt": "2025-07-03T07:33:09.41854",
       "updatedAt": "2025-07-03T07:33:09.41854"
     },
@@ -236,7 +220,7 @@
       "id": 1,
       "title": "Introduction to Programming",
       "description": "Learn the basics of programming concepts",
-      "materialContent": "https://example.com/programming-basics.pdf",
+      "materialContent": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
       "materialType": "PDF",
       "startDate": "2025-06-26T07:33:10.204222",
       "endDate": "2025-07-10T07:33:10.204224",
@@ -258,9 +242,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.154545",
             "updatedAt": "2025-07-03T07:33:09.154545"
           },
@@ -286,9 +268,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.287626",
             "updatedAt": "2025-07-03T07:33:09.287626"
           },
@@ -315,9 +295,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.549038",
             "updatedAt": "2025-07-03T07:33:09.549038"
           },
@@ -343,9 +321,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.680531",
             "updatedAt": "2025-07-03T07:33:09.680531"
           },
@@ -371,9 +347,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.94202",
             "updatedAt": "2025-07-03T07:33:09.94202"
           },
@@ -399,9 +373,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:10.20412",
             "updatedAt": "2025-07-03T07:33:10.20412"
           },
@@ -438,9 +410,7 @@
       "manager": null,
       "subordinates": [],
       "createdAssignments": [],
-      "assignmentProgresses": [
-        null
-      ],
+      "assignmentProgresses": [null],
       "createdAt": "2025-07-03T07:33:09.549038",
       "updatedAt": "2025-07-03T07:33:09.549038"
     },
@@ -449,7 +419,7 @@
       "id": 1,
       "title": "Introduction to Programming",
       "description": "Learn the basics of programming concepts",
-      "materialContent": "https://example.com/programming-basics.pdf",
+      "materialContent": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
       "materialType": "PDF",
       "startDate": "2025-06-26T07:33:10.204222",
       "endDate": "2025-07-10T07:33:10.204224",
@@ -471,9 +441,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.154545",
             "updatedAt": "2025-07-03T07:33:09.154545"
           },
@@ -499,9 +467,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.287626",
             "updatedAt": "2025-07-03T07:33:09.287626"
           },
@@ -527,9 +493,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.41854",
             "updatedAt": "2025-07-03T07:33:09.41854"
           },
@@ -556,9 +520,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.680531",
             "updatedAt": "2025-07-03T07:33:09.680531"
           },
@@ -584,9 +546,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.94202",
             "updatedAt": "2025-07-03T07:33:09.94202"
           },
@@ -612,9 +572,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:10.20412",
             "updatedAt": "2025-07-03T07:33:10.20412"
           },
@@ -651,9 +609,7 @@
       "manager": null,
       "subordinates": [],
       "createdAssignments": [],
-      "assignmentProgresses": [
-        null
-      ],
+      "assignmentProgresses": [null],
       "createdAt": "2025-07-03T07:33:09.287626",
       "updatedAt": "2025-07-03T07:33:09.287626"
     },
@@ -662,7 +618,7 @@
       "id": 1,
       "title": "Introduction to Programming",
       "description": "Learn the basics of programming concepts",
-      "materialContent": "https://example.com/programming-basics.pdf",
+      "materialContent": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
       "materialType": "PDF",
       "startDate": "2025-06-26T07:33:10.204222",
       "endDate": "2025-07-10T07:33:10.204224",
@@ -684,9 +640,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.154545",
             "updatedAt": "2025-07-03T07:33:09.154545"
           },
@@ -713,9 +667,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.41854",
             "updatedAt": "2025-07-03T07:33:09.41854"
           },
@@ -741,9 +693,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.549038",
             "updatedAt": "2025-07-03T07:33:09.549038"
           },
@@ -769,9 +719,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.680531",
             "updatedAt": "2025-07-03T07:33:09.680531"
           },
@@ -797,9 +745,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.94202",
             "updatedAt": "2025-07-03T07:33:09.94202"
           },
@@ -825,9 +771,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:10.20412",
             "updatedAt": "2025-07-03T07:33:10.20412"
           },
@@ -864,9 +808,7 @@
       "manager": null,
       "subordinates": [],
       "createdAssignments": [],
-      "assignmentProgresses": [
-        null
-      ],
+      "assignmentProgresses": [null],
       "createdAt": "2025-07-03T07:33:09.154545",
       "updatedAt": "2025-07-03T07:33:09.154545"
     },
@@ -875,7 +817,7 @@
       "id": 1,
       "title": "Introduction to Programming",
       "description": "Learn the basics of programming concepts",
-      "materialContent": "https://example.com/programming-basics.pdf",
+      "materialContent": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
       "materialType": "PDF",
       "startDate": "2025-06-26T07:33:10.204222",
       "endDate": "2025-07-10T07:33:10.204224",
@@ -898,9 +840,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.287626",
             "updatedAt": "2025-07-03T07:33:09.287626"
           },
@@ -926,9 +866,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.41854",
             "updatedAt": "2025-07-03T07:33:09.41854"
           },
@@ -954,9 +892,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.549038",
             "updatedAt": "2025-07-03T07:33:09.549038"
           },
@@ -982,9 +918,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.680531",
             "updatedAt": "2025-07-03T07:33:09.680531"
           },
@@ -1010,9 +944,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.94202",
             "updatedAt": "2025-07-03T07:33:09.94202"
           },
@@ -1038,9 +970,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:10.20412",
             "updatedAt": "2025-07-03T07:33:10.20412"
           },
@@ -1077,9 +1007,7 @@
       "manager": null,
       "subordinates": [],
       "createdAssignments": [],
-      "assignmentProgresses": [
-        null
-      ],
+      "assignmentProgresses": [null],
       "createdAt": "2025-07-03T07:33:10.20412",
       "updatedAt": "2025-07-03T07:33:10.20412"
     },
@@ -1088,7 +1016,7 @@
       "id": 1,
       "title": "Introduction to Programming",
       "description": "Learn the basics of programming concepts",
-      "materialContent": "https://example.com/programming-basics.pdf",
+      "materialContent": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
       "materialType": "PDF",
       "startDate": "2025-06-26T07:33:10.204222",
       "endDate": "2025-07-10T07:33:10.204224",
@@ -1110,9 +1038,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.154545",
             "updatedAt": "2025-07-03T07:33:09.154545"
           },
@@ -1138,9 +1064,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.287626",
             "updatedAt": "2025-07-03T07:33:09.287626"
           },
@@ -1166,9 +1090,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.41854",
             "updatedAt": "2025-07-03T07:33:09.41854"
           },
@@ -1194,9 +1116,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.549038",
             "updatedAt": "2025-07-03T07:33:09.549038"
           },
@@ -1222,9 +1142,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.680531",
             "updatedAt": "2025-07-03T07:33:09.680531"
           },
@@ -1250,9 +1168,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.94202",
             "updatedAt": "2025-07-03T07:33:09.94202"
           },
@@ -1290,9 +1206,7 @@
       "manager": null,
       "subordinates": [],
       "createdAssignments": [],
-      "assignmentProgresses": [
-        null
-      ],
+      "assignmentProgresses": [null],
       "createdAt": "2025-07-03T07:33:09.680531",
       "updatedAt": "2025-07-03T07:33:09.680531"
     },
@@ -1301,7 +1215,7 @@
       "id": 1,
       "title": "Introduction to Programming",
       "description": "Learn the basics of programming concepts",
-      "materialContent": "https://example.com/programming-basics.pdf",
+      "materialContent": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
       "materialType": "PDF",
       "startDate": "2025-06-26T07:33:10.204222",
       "endDate": "2025-07-10T07:33:10.204224",
@@ -1323,9 +1237,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.154545",
             "updatedAt": "2025-07-03T07:33:09.154545"
           },
@@ -1351,9 +1263,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.287626",
             "updatedAt": "2025-07-03T07:33:09.287626"
           },
@@ -1379,9 +1289,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.41854",
             "updatedAt": "2025-07-03T07:33:09.41854"
           },
@@ -1407,9 +1315,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.549038",
             "updatedAt": "2025-07-03T07:33:09.549038"
           },
@@ -1436,9 +1342,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.94202",
             "updatedAt": "2025-07-03T07:33:09.94202"
           },
@@ -1464,9 +1368,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:10.20412",
             "updatedAt": "2025-07-03T07:33:10.20412"
           },
@@ -1512,7 +1414,7 @@
       "id": 1,
       "title": "Introduction to Programming",
       "description": "Learn the basics of programming concepts",
-      "materialContent": "https://example.com/programming-basics.pdf",
+      "materialContent": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
       "materialType": "PDF",
       "startDate": "2025-06-26T07:33:10.204222",
       "endDate": "2025-07-10T07:33:10.204224",
@@ -1534,9 +1436,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.154545",
             "updatedAt": "2025-07-03T07:33:09.154545"
           },
@@ -1562,9 +1462,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.287626",
             "updatedAt": "2025-07-03T07:33:09.287626"
           },
@@ -1590,9 +1488,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.41854",
             "updatedAt": "2025-07-03T07:33:09.41854"
           },
@@ -1618,9 +1514,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.549038",
             "updatedAt": "2025-07-03T07:33:09.549038"
           },
@@ -1646,9 +1540,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.680531",
             "updatedAt": "2025-07-03T07:33:09.680531"
           },
@@ -1674,9 +1566,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.94202",
             "updatedAt": "2025-07-03T07:33:09.94202"
           },
@@ -1702,9 +1592,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:10.20412",
             "updatedAt": "2025-07-03T07:33:10.20412"
           },
@@ -1750,7 +1638,7 @@
       "id": 1,
       "title": "Introduction to Programming",
       "description": "Learn the basics of programming concepts",
-      "materialContent": "https://example.com/programming-basics.pdf",
+      "materialContent": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
       "materialType": "PDF",
       "startDate": "2025-06-26T07:33:10.204222",
       "endDate": "2025-07-10T07:33:10.204224",
@@ -1772,9 +1660,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.154545",
             "updatedAt": "2025-07-03T07:33:09.154545"
           },
@@ -1800,9 +1686,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.287626",
             "updatedAt": "2025-07-03T07:33:09.287626"
           },
@@ -1828,9 +1712,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.41854",
             "updatedAt": "2025-07-03T07:33:09.41854"
           },
@@ -1856,9 +1738,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.549038",
             "updatedAt": "2025-07-03T07:33:09.549038"
           },
@@ -1884,9 +1764,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.680531",
             "updatedAt": "2025-07-03T07:33:09.680531"
           },
@@ -1912,9 +1790,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.94202",
             "updatedAt": "2025-07-03T07:33:09.94202"
           },
@@ -1940,9 +1816,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:10.20412",
             "updatedAt": "2025-07-03T07:33:10.20412"
           },
@@ -1988,7 +1862,7 @@
       "id": 1,
       "title": "Introduction to Programming",
       "description": "Learn the basics of programming concepts",
-      "materialContent": "https://example.com/programming-basics.pdf",
+      "materialContent": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
       "materialType": "PDF",
       "startDate": "2025-06-26T07:33:10.204222",
       "endDate": "2025-07-10T07:33:10.204224",
@@ -2010,9 +1884,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.154545",
             "updatedAt": "2025-07-03T07:33:09.154545"
           },
@@ -2038,9 +1910,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.287626",
             "updatedAt": "2025-07-03T07:33:09.287626"
           },
@@ -2066,9 +1936,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.41854",
             "updatedAt": "2025-07-03T07:33:09.41854"
           },
@@ -2094,9 +1962,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.549038",
             "updatedAt": "2025-07-03T07:33:09.549038"
           },
@@ -2122,9 +1988,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.680531",
             "updatedAt": "2025-07-03T07:33:09.680531"
           },
@@ -2150,9 +2014,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:09.94202",
             "updatedAt": "2025-07-03T07:33:09.94202"
           },
@@ -2178,9 +2040,7 @@
             "manager": null,
             "subordinates": [],
             "createdAssignments": [],
-            "assignmentProgresses": [
-              null
-            ],
+            "assignmentProgresses": [null],
             "createdAt": "2025-07-03T07:33:10.20412",
             "updatedAt": "2025-07-03T07:33:10.20412"
           },

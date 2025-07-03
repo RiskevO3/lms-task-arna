@@ -222,7 +222,7 @@ namespace lms_arna_task.Data
                     Id = 1,
                     Title = "Introduction to Programming",
                     Description = "Learn the basics of programming concepts",
-                    MaterialContent = "https://example.com/programming-basics.pdf",
+                    MaterialContent = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
                     MaterialType = "PDF",
                     StartDate = DateTime.UtcNow.AddDays(-7),
                     EndDate = DateTime.UtcNow.AddDays(7),

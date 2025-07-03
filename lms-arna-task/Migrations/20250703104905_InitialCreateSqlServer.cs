@@ -168,7 +168,7 @@ namespace lmsarnatask.Migrations
             migrationBuilder.InsertData(
                 table: "Assignments",
                 columns: new[] { "Id", "CreatedAt", "CreatedById", "Description", "EndDate", "IsActive", "MaterialContent", "MaterialType", "StartDate", "Title", "UpdatedAt" },
-                values: new object[] { 1, new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1050), 1, "Learn the basics of programming concepts", new DateTime(2025, 7, 10, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1050), true, "https://example.com/programming-basics.pdf", "PDF", new DateTime(2025, 6, 26, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1030), "Introduction to Programming", new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1050) });
+                values: new object[] { 1, new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1050), 1, "Learn the basics of programming concepts", new DateTime(2025, 7, 10, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1050), true, "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "PDF", new DateTime(2025, 6, 26, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1030), "Introduction to Programming", new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1050) });
 
             migrationBuilder.InsertData(
                 table: "Users",

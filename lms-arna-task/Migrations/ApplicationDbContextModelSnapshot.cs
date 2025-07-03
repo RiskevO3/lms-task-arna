@@ -80,7 +80,7 @@ namespace lmsarnatask.Migrations
                             Description = "Learn the basics of programming concepts",
                             EndDate = new DateTime(2025, 7, 10, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1050),
                             IsActive = true,
-                            MaterialContent = "https://example.com/programming-basics.pdf",
+                            MaterialContent = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
                             MaterialType = "PDF",
                             StartDate = new DateTime(2025, 6, 26, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1030),
                             Title = "Introduction to Programming",
