@@ -54,7 +54,9 @@ Controllers (API & UI) → Services (Business Logic) → Repositories (Data Acce
 
 ### DTOs (Data Transfer Objects)
 
-- **ProgressReportDto**: Simplified data structure for API responses, avoiding circular references and providing clean serialization for progress reports
+- **ProgressReport**: Simplified data structure for API responses, avoiding circular references and providing clean serialization for progress reports
+- **UserAnswerDetails**: Comprehensive answer details with question-by-question breakdown for manager review
+- **QuestionDetail**: Individual question response data with correct/selected answer comparison
 
 ### Key Relationships
 
@@ -177,8 +179,8 @@ The application includes sample progress data:
 ### API Enhancements
 
 - **New Endpoint**: `/api/quiz/answers/{userId}/{assignmentId}` for retrieving detailed quiz answers
-- **ProgressReportDto**: Structured data transfer object for consistent API responses
-- **UserAnswerDetailsDto**: Comprehensive answer details with question-by-question breakdown
+- **ProgressReport**: Structured data transfer object for consistent API responses
+- **UserAnswerDetails**: Comprehensive answer details with question-by-question breakdown
 - **Manager Authorization**: Secure access to sensitive learner data
 
 ### UI/UX Improvements
@@ -207,8 +209,8 @@ The application includes sample progress data:
 - `GET /api/quiz/progress/{assignmentId}` - Get user progress
 - `POST /api/quiz/start/{assignmentId}` - Start assignment
 - `POST /api/quiz/submit/{assignmentId}` - Submit quiz answers
-- `GET /api/quiz/report` - Get progress report (Manager only) - Returns ProgressReportDto array
-- `GET /api/quiz/answers/{userId}/{assignmentId}` - Get detailed quiz answers (Manager only) - Returns UserAnswerDetailsDto
+- `GET /api/quiz/report` - Get progress report (Manager only) - Returns ProgressReport array
+- `GET /api/quiz/answers/{userId}/{assignmentId}` - Get detailed quiz answers (Manager only) - Returns UserAnswerDetails
 - `GET /api/quiz/check-completion/{assignmentId}` - Check completion status
 
 ## Testing the Application
@@ -314,15 +316,16 @@ lms-task-arna/
 │   │   └── QuizRepository.cs
 │   ├── Data/
 │   │   └── ApplicationDbContext.cs   # EF Core context
-│   ├── Models/                       # Domain models & DTOs
+│   ├── Models/                       # Database entities
 │   │   ├── User.cs
 │   │   ├── Assignment.cs
 │   │   ├── Question.cs
 │   │   ├── AssignmentProgress.cs
-│   │   ├── UserAnswer.cs
-│   │   ├── ProgressReportDto.cs
-│   │   ├── UserAnswerDetailsDto.cs
-│   │   └── QuestionDetailDto.cs
+│   │   └── UserAnswer.cs
+│   ├── DTOs/                         # Data transfer objects
+│   │   ├── ProgressReport.cs
+│   │   ├── UserAnswerDetails.cs
+│   │   └── QuestionDetail.cs
 │   ├── Migrations/                   # EF Core migrations
 │   └── Program.cs                    # Application startup
 └── lms-arna-task.Tests/             # Unit tests
@@ -356,8 +359,14 @@ lms-task-arna/
 
 - **Complete Learner Coverage**: Fixed issue where only 7 out of 10 learners were shown in progress reports
 - **Virtual Progress Entries**: Learners who haven't started assignments now appear with "Not Started" status
-- **DTO Implementation**: Added `ProgressReportDto` to avoid circular references and improve API response structure
 - **Data Integrity**: All learners in the manager's team are now guaranteed to appear in progress reports
+
+### Model Architecture Refactoring
+
+- **Clean Separation**: DTOs moved from `Models/` to dedicated `DTOs/` folder
+- **Consistent Naming**: Removed "Dto" suffix from class names for cleaner code
+- **Namespace Organization**: DTOs now use `lms_arna_task.DTOs` namespace
+- **Better Maintainability**: Clear distinction between database entities and API data transfer objects
 
 ### UI/UX Improvements
 
