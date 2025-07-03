@@ -21,7 +21,7 @@ A full-stack Learning Management System built with .NET 8 and Blazor Server, fea
 
 - **Backend**: .NET 8, ASP.NET Core Web API
 - **Frontend**: Blazor Server
-- **Database**: SQLite (for cross-platform compatibility)
+- **Database**: Microsoft SQL Server
 - **Authentication**: Cookie-based authentication with BCrypt password hashing
 - **ORM**: Entity Framework Core 8.0
 - **Testing**: xUnit with In-Memory Database
@@ -70,7 +70,7 @@ Controllers (API & UI) → Services (Business Logic) → Repositories (Data Acce
 ### Prerequisites
 
 - .NET 8 SDK
-- SQLite (included with .NET)
+- Microsoft SQL Server (2019 or later) or SQL Server Express
 - Visual Studio 2022 or VS Code
 
 ### Installation
@@ -82,37 +82,54 @@ Controllers (API & UI) → Services (Business Logic) → Repositories (Data Acce
    cd lms-task-arna
    ```
 
-2. **Restore packages**
+2. **Setup SQL Server Database**
+
+   Make sure you have SQL Server running on `localhost,1433` with the credentials configured in `appsettings.json`:
+
+   - Server: localhost,1433
+   - Database: lmsarna (will be created automatically)
+   - User: sa
+   - Password: admin
+
+   **Docker SQL Server Option:**
+
+   ```bash
+   docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=admin" \
+   -p 1433:1433 --name sqlserver2022 \
+   -d mcr.microsoft.com/mssql/server:2022-latest
+   ```
+
+3. **Restore packages**
 
    ```bash
    dotnet restore
    ```
 
-3. **Update connection string** (if needed)
+4. **Update connection string** (if needed)
    Edit `appsettings.json`:
 
    ```json
    {
      "ConnectionStrings": {
-       "DefaultConnection": "Data Source=lms-arna-task.db"
+       "DefaultConnection": "Server=localhost,1433;Database=lmsarna;User ID=sa;Password=admin;Encrypt=True;TrustServerCertificate=True"
      }
    }
    ```
 
-4. **Run database migrations**
+5. **Run database migrations**
 
    ```bash
    cd lms-arna-task
    dotnet ef database update
    ```
 
-5. **Run the application**
+6. **Run the application**
 
    ```bash
    dotnet run
    ```
 
-6. **Access the application**
+7. **Access the application**
    Open your browser and navigate to `http://localhost:5219`
 
 ## Default User Accounts
@@ -253,12 +270,14 @@ dotnet watch run
 
 ### Database Migrations
 
-The application uses EF Core with automatic database creation. To create migrations manually:
+The application uses EF Core with automatic database creation for SQL Server. To create migrations manually:
 
 ```bash
-dotnet ef migrations add InitialCreate
+dotnet ef migrations add MigrationName
 dotnet ef database update
 ```
+
+**Note**: The application will automatically create the `lmsarna` database on SQL Server if it doesn't exist during the first migration.
 
 ### Testing
 

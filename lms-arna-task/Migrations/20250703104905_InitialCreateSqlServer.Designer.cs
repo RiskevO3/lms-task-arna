@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using lms_arna_task.Data;
@@ -11,55 +12,61 @@ using lms_arna_task.Data;
 namespace lmsarnatask.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250703073310_AddDummyLearners")]
-    partial class AddDummyLearners
+    [Migration("20250703104905_InitialCreateSqlServer")]
+    partial class InitialCreateSqlServer
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("lms_arna_task.Models.Assignment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("CreatedById")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<string>("MaterialContent")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MaterialType")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -71,16 +78,16 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2240),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1050),
                             CreatedById = 1,
                             Description = "Learn the basics of programming concepts",
-                            EndDate = new DateTime(2025, 7, 10, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2240),
+                            EndDate = new DateTime(2025, 7, 10, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1050),
                             IsActive = true,
                             MaterialContent = "https://example.com/programming-basics.pdf",
                             MaterialType = "PDF",
-                            StartDate = new DateTime(2025, 6, 26, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2220),
+                            StartDate = new DateTime(2025, 6, 26, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1030),
                             Title = "Introduction to Programming",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2240)
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1050)
                         });
                 });
 
@@ -88,28 +95,30 @@ namespace lmsarnatask.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AssignmentId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CompletedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsCompleted")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<int>("Score")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("StartedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -125,55 +134,55 @@ namespace lmsarnatask.Migrations
                         {
                             Id = 1,
                             AssignmentId = 1,
-                            CompletedAt = new DateTime(2025, 6, 29, 0, 11, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            CompletedAt = new DateTime(2025, 6, 29, 3, 27, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             IsCompleted = true,
                             Score = 100,
-                            StartedAt = new DateTime(2025, 6, 28, 23, 33, 10, 204, DateTimeKind.Utc).AddTicks(2450),
-                            UpdatedAt = new DateTime(2025, 6, 29, 0, 11, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            StartedAt = new DateTime(2025, 6, 29, 2, 49, 5, 305, DateTimeKind.Utc).AddTicks(1300),
+                            UpdatedAt = new DateTime(2025, 6, 29, 3, 27, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             UserId = 3
                         },
                         new
                         {
                             Id = 2,
                             AssignmentId = 1,
-                            CompletedAt = new DateTime(2025, 6, 30, 6, 52, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            CompletedAt = new DateTime(2025, 6, 30, 10, 8, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             IsCompleted = true,
                             Score = 40,
-                            StartedAt = new DateTime(2025, 6, 30, 6, 33, 10, 204, DateTimeKind.Utc).AddTicks(2450),
-                            UpdatedAt = new DateTime(2025, 6, 30, 6, 52, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            StartedAt = new DateTime(2025, 6, 30, 9, 49, 5, 305, DateTimeKind.Utc).AddTicks(1300),
+                            UpdatedAt = new DateTime(2025, 6, 30, 10, 8, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             UserId = 4
                         },
                         new
                         {
                             Id = 3,
                             AssignmentId = 1,
-                            CompletedAt = new DateTime(2025, 7, 2, 8, 5, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            CompletedAt = new DateTime(2025, 7, 2, 11, 21, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             IsCompleted = true,
                             Score = 80,
-                            StartedAt = new DateTime(2025, 7, 2, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2450),
-                            UpdatedAt = new DateTime(2025, 7, 2, 8, 5, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            StartedAt = new DateTime(2025, 7, 2, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1300),
+                            UpdatedAt = new DateTime(2025, 7, 2, 11, 21, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             UserId = 5
                         },
                         new
                         {
                             Id = 4,
                             AssignmentId = 1,
-                            CompletedAt = new DateTime(2025, 7, 1, 19, 57, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            CompletedAt = new DateTime(2025, 7, 1, 23, 13, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             IsCompleted = true,
                             Score = 60,
-                            StartedAt = new DateTime(2025, 7, 1, 19, 33, 10, 204, DateTimeKind.Utc).AddTicks(2450),
-                            UpdatedAt = new DateTime(2025, 7, 1, 19, 57, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            StartedAt = new DateTime(2025, 7, 1, 22, 49, 5, 305, DateTimeKind.Utc).AddTicks(1300),
+                            UpdatedAt = new DateTime(2025, 7, 1, 23, 13, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             UserId = 6
                         },
                         new
                         {
                             Id = 5,
                             AssignmentId = 1,
-                            CompletedAt = new DateTime(2025, 6, 28, 14, 49, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            CompletedAt = new DateTime(2025, 6, 28, 18, 5, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             IsCompleted = true,
                             Score = 40,
-                            StartedAt = new DateTime(2025, 6, 28, 14, 33, 10, 204, DateTimeKind.Utc).AddTicks(2450),
-                            UpdatedAt = new DateTime(2025, 6, 28, 14, 49, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            StartedAt = new DateTime(2025, 6, 28, 17, 49, 5, 305, DateTimeKind.Utc).AddTicks(1300),
+                            UpdatedAt = new DateTime(2025, 6, 28, 18, 5, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             UserId = 7
                         },
                         new
@@ -182,19 +191,19 @@ namespace lmsarnatask.Migrations
                             AssignmentId = 1,
                             IsCompleted = false,
                             Score = 0,
-                            StartedAt = new DateTime(2025, 7, 2, 16, 33, 10, 204, DateTimeKind.Utc).AddTicks(2450),
-                            UpdatedAt = new DateTime(2025, 7, 2, 16, 46, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            StartedAt = new DateTime(2025, 7, 2, 19, 49, 5, 305, DateTimeKind.Utc).AddTicks(1300),
+                            UpdatedAt = new DateTime(2025, 7, 2, 20, 2, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             UserId = 9
                         },
                         new
                         {
                             Id = 9,
                             AssignmentId = 1,
-                            CompletedAt = new DateTime(2025, 6, 28, 20, 2, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            CompletedAt = new DateTime(2025, 6, 28, 23, 18, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             IsCompleted = true,
                             Score = 60,
-                            StartedAt = new DateTime(2025, 6, 28, 19, 33, 10, 204, DateTimeKind.Utc).AddTicks(2450),
-                            UpdatedAt = new DateTime(2025, 6, 28, 20, 2, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            StartedAt = new DateTime(2025, 6, 28, 22, 49, 5, 305, DateTimeKind.Utc).AddTicks(1300),
+                            UpdatedAt = new DateTime(2025, 6, 28, 23, 18, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             UserId = 11
                         });
                 });
@@ -203,41 +212,43 @@ namespace lmsarnatask.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AssignmentId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("CorrectAnswer")
                         .IsRequired()
                         .HasMaxLength(1)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("OptionA")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OptionB")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OptionC")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OptionD")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuestionText")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -251,65 +262,65 @@ namespace lmsarnatask.Migrations
                             Id = 1,
                             AssignmentId = 1,
                             CorrectAnswer = "B",
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2340),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1160),
                             OptionA = "A fixed value",
                             OptionB = "A container for storing data",
                             OptionC = "A function",
                             OptionD = "A loop",
                             QuestionText = "What is a variable in programming?",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2340)
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1160)
                         },
                         new
                         {
                             Id = 2,
                             AssignmentId = 1,
                             CorrectAnswer = "D",
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2350),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1160),
                             OptionA = "HTML",
                             OptionB = "CSS",
                             OptionC = "JavaScript",
                             OptionD = "All of the above",
                             QuestionText = "Which of the following is a programming language?",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2350)
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1160)
                         },
                         new
                         {
                             Id = 3,
                             AssignmentId = 1,
                             CorrectAnswer = "B",
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2350),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1160),
                             OptionA = "Loops through code",
                             OptionB = "Makes decisions in code",
                             OptionC = "Stores data",
                             OptionD = "Prints output",
                             QuestionText = "What does 'if' statement do?",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2350)
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1160)
                         },
                         new
                         {
                             Id = 4,
                             AssignmentId = 1,
                             CorrectAnswer = "A",
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2350),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1170),
                             OptionA = "A reusable block of code",
                             OptionB = "A variable",
                             OptionC = "A loop",
                             OptionD = "A condition",
                             QuestionText = "What is a function?",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2350)
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1170)
                         },
                         new
                         {
                             Id = 5,
                             AssignmentId = 1,
                             CorrectAnswer = "C",
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2350),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1170),
                             OptionA = "Writing code",
                             OptionB = "Testing code",
                             OptionC = "Finding and fixing errors",
                             OptionD = "Compiling code",
                             QuestionText = "What does debugging mean?",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(2350)
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 305, DateTimeKind.Utc).AddTicks(1170)
                         });
                 });
 
@@ -317,36 +328,38 @@ namespace lmsarnatask.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int?>("ManagerId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -364,121 +377,121 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 8, 888, DateTimeKind.Utc).AddTicks(6750),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 3, 963, DateTimeKind.Utc).AddTicks(4960),
                             Email = "manager@example.com",
-                            PasswordHash = "$2a$11$aTrhKBJ8IgLzSHYLBpNiWOldfBrJDRymED1OnMQ2ukQ6oSfP9.3rq",
+                            PasswordHash = "$2a$11$8VugUlXPoBaMzcN5GTEjOOa7V8ErGXChv799qrBVBa3aWR/pmSzui",
                             Role = "Manager",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 8, 888, DateTimeKind.Utc).AddTicks(6750),
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 3, 963, DateTimeKind.Utc).AddTicks(4960),
                             Username = "manager"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 20, DateTimeKind.Utc).AddTicks(9370),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 96, DateTimeKind.Utc).AddTicks(160),
                             Email = "learner1@example.com",
                             ManagerId = 1,
-                            PasswordHash = "$2a$11$Z8P6LGLvh5rDkNQCDzehLeqEWQ32sgpyjtXA/vRPMAq1shIpA9D7i",
+                            PasswordHash = "$2a$11$aRD8sJ/9C479v9fk0d8Amuon/lw7ga4k30/hsxN94aHALo96sb3M6",
                             Role = "Learner",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 20, DateTimeKind.Utc).AddTicks(9370),
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 96, DateTimeKind.Utc).AddTicks(160),
                             Username = "learner1"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 154, DateTimeKind.Utc).AddTicks(5450),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 229, DateTimeKind.Utc).AddTicks(4520),
                             Email = "learner2@example.com",
                             ManagerId = 1,
-                            PasswordHash = "$2a$11$1VBPWO21Eb2s0nto5gbuxuue3TO5EJZ20zH6TFr7TrDDHUt9TQHaW",
+                            PasswordHash = "$2a$11$44xhAay3vTQq8LeAsaWJtO/.EAB5GN9AGARSLx6Yzv5HxKBmx0Vcq",
                             Role = "Learner",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 154, DateTimeKind.Utc).AddTicks(5450),
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 229, DateTimeKind.Utc).AddTicks(4520),
                             Username = "learner2"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 287, DateTimeKind.Utc).AddTicks(6260),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 361, DateTimeKind.Utc).AddTicks(2750),
                             Email = "learner3@example.com",
                             ManagerId = 1,
-                            PasswordHash = "$2a$11$1PKU/mneyvrhNZcA80DPpeJWoAvNf8okI75RxnDOU/fEAUJV9DzN6",
+                            PasswordHash = "$2a$11$AAqbEKY830pfZSdN6/QosuQ4ITey0WJcTHEC2qslK1iQVzuI10Qua",
                             Role = "Learner",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 287, DateTimeKind.Utc).AddTicks(6260),
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 361, DateTimeKind.Utc).AddTicks(2750),
                             Username = "learner3"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 418, DateTimeKind.Utc).AddTicks(5400),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 492, DateTimeKind.Utc).AddTicks(2470),
                             Email = "learner4@example.com",
                             ManagerId = 1,
-                            PasswordHash = "$2a$11$rhcvtQDUFkzaRxEDGPnSUeNLQPQuNVrgy/tKQAh/ZEaZMGdiw9Iau",
+                            PasswordHash = "$2a$11$jhktvaF2o5TspPhdezXWSOZ8oxyhK.nLIjCHAu96LMppEnN9khICS",
                             Role = "Learner",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 418, DateTimeKind.Utc).AddTicks(5400),
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 492, DateTimeKind.Utc).AddTicks(2470),
                             Username = "learner4"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 549, DateTimeKind.Utc).AddTicks(380),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 635, DateTimeKind.Utc).AddTicks(1380),
                             Email = "learner5@example.com",
                             ManagerId = 1,
-                            PasswordHash = "$2a$11$njegO8Tt5EOP6CS/OCPpQ.w7bR/g4Qz6JnVdFtC88liA4oTuqe9dG",
+                            PasswordHash = "$2a$11$jzdDf4qItqgcLbKi4QYn9en0sVMGarElUV84CdxQKRUEFdHpeWM26",
                             Role = "Learner",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 549, DateTimeKind.Utc).AddTicks(380),
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 635, DateTimeKind.Utc).AddTicks(1380),
                             Username = "learner5"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 680, DateTimeKind.Utc).AddTicks(5310),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 768, DateTimeKind.Utc).AddTicks(1000),
                             Email = "learner6@example.com",
                             ManagerId = 1,
-                            PasswordHash = "$2a$11$pf4k3Qqaz3lFXFo5RW1NfuTgw8qh9sqHJB87KKFZ0ngEYOX3OSF.K",
+                            PasswordHash = "$2a$11$1kZjZsS5tq5VY5qalhjcUu186Fv8T2e.zQyQ8yHR7EJZ5xm3FLLg2",
                             Role = "Learner",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 680, DateTimeKind.Utc).AddTicks(5310),
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 768, DateTimeKind.Utc).AddTicks(1000),
                             Username = "learner6"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 811, DateTimeKind.Utc).AddTicks(2940),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 900, DateTimeKind.Utc).AddTicks(5270),
                             Email = "learner7@example.com",
                             ManagerId = 1,
-                            PasswordHash = "$2a$11$81ySK6jm3wUT2BLhUHEWtuFSF2eXz8UQxsOVAPZiz5Z6ryJwUtrsi",
+                            PasswordHash = "$2a$11$.vKjd9//OciJEPToE.SxUeWbvuj3aY4KqPZrotcyTISaE7iRae.O2",
                             Role = "Learner",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 811, DateTimeKind.Utc).AddTicks(2940),
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 4, 900, DateTimeKind.Utc).AddTicks(5270),
                             Username = "learner7"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 942, DateTimeKind.Utc).AddTicks(200),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 36, DateTimeKind.Utc).AddTicks(5220),
                             Email = "learner8@example.com",
                             ManagerId = 1,
-                            PasswordHash = "$2a$11$7xrnB5itcjd2rphCyUHrj.eAEIsuNVPqdLS/En6yRCAYXB6qqrE.q",
+                            PasswordHash = "$2a$11$RzeEAWRfjsLxMd78NzGi7.wVlrOg2Vaklam/87BEnXvQLpHojVfmq",
                             Role = "Learner",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 9, 942, DateTimeKind.Utc).AddTicks(200),
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 36, DateTimeKind.Utc).AddTicks(5220),
                             Username = "learner8"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 71, DateTimeKind.Utc).AddTicks(6970),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 170, DateTimeKind.Utc).AddTicks(1240),
                             Email = "learner9@example.com",
                             ManagerId = 1,
-                            PasswordHash = "$2a$11$zqzbZQUCRWs4t9.DG01O9uedorOlaPCFMKbA9fLUlTUFE7Odmx.IK",
+                            PasswordHash = "$2a$11$YKlo11VuJMhClK3fJYVNOuvF6sRArZTacalxroyB92bUap3D0UF9.",
                             Role = "Learner",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 71, DateTimeKind.Utc).AddTicks(6970),
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 170, DateTimeKind.Utc).AddTicks(1240),
                             Username = "learner9"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(1200),
+                            CreatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 304, DateTimeKind.Utc).AddTicks(9400),
                             Email = "learner10@example.com",
                             ManagerId = 1,
-                            PasswordHash = "$2a$11$B0OfveVG51mAOSbkhja67OZRFXKZC267KKmcLmAmgTLGYyb8UnI/u",
+                            PasswordHash = "$2a$11$WhppKAlHk1nrQe5T4GaX9.uka2LlCefsiIiFZeM00miC0y6Up0kNy",
                             Role = "Learner",
-                            UpdatedAt = new DateTime(2025, 7, 3, 7, 33, 10, 204, DateTimeKind.Utc).AddTicks(1200),
+                            UpdatedAt = new DateTime(2025, 7, 3, 10, 49, 5, 304, DateTimeKind.Utc).AddTicks(9400),
                             Username = "learner10"
                         });
                 });
@@ -487,27 +500,29 @@ namespace lmsarnatask.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("AnsweredAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("AssignmentProgressId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsCorrect")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<int>("QuestionId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("SelectedAnswer")
                         .IsRequired()
                         .HasMaxLength(1)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -523,7 +538,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 6,
-                            AnsweredAt = new DateTime(2025, 6, 29, 0, 6, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 29, 3, 22, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 1,
                             IsCorrect = true,
                             QuestionId = 1,
@@ -533,7 +548,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 7,
-                            AnsweredAt = new DateTime(2025, 6, 29, 0, 8, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 29, 3, 24, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 1,
                             IsCorrect = true,
                             QuestionId = 2,
@@ -543,7 +558,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 8,
-                            AnsweredAt = new DateTime(2025, 6, 28, 23, 58, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 29, 3, 14, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 1,
                             IsCorrect = true,
                             QuestionId = 3,
@@ -553,7 +568,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 9,
-                            AnsweredAt = new DateTime(2025, 6, 28, 23, 48, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 29, 3, 4, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 1,
                             IsCorrect = true,
                             QuestionId = 4,
@@ -563,7 +578,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 10,
-                            AnsweredAt = new DateTime(2025, 6, 29, 0, 10, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 29, 3, 26, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 1,
                             IsCorrect = true,
                             QuestionId = 5,
@@ -573,7 +588,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 11,
-                            AnsweredAt = new DateTime(2025, 6, 30, 6, 59, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 30, 10, 15, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 2,
                             IsCorrect = false,
                             QuestionId = 1,
@@ -583,7 +598,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 12,
-                            AnsweredAt = new DateTime(2025, 6, 30, 6, 43, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 30, 9, 59, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 2,
                             IsCorrect = false,
                             QuestionId = 2,
@@ -593,7 +608,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 13,
-                            AnsweredAt = new DateTime(2025, 6, 30, 6, 58, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 30, 10, 14, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 2,
                             IsCorrect = false,
                             QuestionId = 3,
@@ -603,7 +618,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 14,
-                            AnsweredAt = new DateTime(2025, 6, 30, 6, 50, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 30, 10, 6, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 2,
                             IsCorrect = true,
                             QuestionId = 4,
@@ -613,7 +628,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 15,
-                            AnsweredAt = new DateTime(2025, 6, 30, 6, 38, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 30, 9, 54, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 2,
                             IsCorrect = true,
                             QuestionId = 5,
@@ -623,7 +638,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 16,
-                            AnsweredAt = new DateTime(2025, 7, 2, 7, 40, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 7, 2, 10, 56, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 3,
                             IsCorrect = true,
                             QuestionId = 1,
@@ -633,7 +648,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 17,
-                            AnsweredAt = new DateTime(2025, 7, 2, 7, 42, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 7, 2, 10, 58, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 3,
                             IsCorrect = true,
                             QuestionId = 2,
@@ -643,7 +658,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 18,
-                            AnsweredAt = new DateTime(2025, 7, 2, 7, 49, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 7, 2, 11, 5, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 3,
                             IsCorrect = false,
                             QuestionId = 3,
@@ -653,7 +668,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 19,
-                            AnsweredAt = new DateTime(2025, 7, 2, 7, 39, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 7, 2, 10, 55, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 3,
                             IsCorrect = true,
                             QuestionId = 4,
@@ -663,7 +678,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 20,
-                            AnsweredAt = new DateTime(2025, 7, 2, 7, 40, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 7, 2, 10, 56, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 3,
                             IsCorrect = true,
                             QuestionId = 5,
@@ -673,7 +688,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 21,
-                            AnsweredAt = new DateTime(2025, 7, 1, 19, 48, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 7, 1, 23, 4, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 4,
                             IsCorrect = true,
                             QuestionId = 1,
@@ -683,7 +698,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 22,
-                            AnsweredAt = new DateTime(2025, 7, 1, 19, 40, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 7, 1, 22, 56, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 4,
                             IsCorrect = false,
                             QuestionId = 2,
@@ -693,7 +708,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 23,
-                            AnsweredAt = new DateTime(2025, 7, 1, 20, 9, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 7, 1, 23, 25, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 4,
                             IsCorrect = true,
                             QuestionId = 3,
@@ -703,7 +718,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 24,
-                            AnsweredAt = new DateTime(2025, 7, 1, 19, 57, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 7, 1, 23, 13, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 4,
                             IsCorrect = true,
                             QuestionId = 4,
@@ -713,7 +728,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 25,
-                            AnsweredAt = new DateTime(2025, 7, 1, 19, 38, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 7, 1, 22, 54, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 4,
                             IsCorrect = false,
                             QuestionId = 5,
@@ -723,7 +738,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 26,
-                            AnsweredAt = new DateTime(2025, 6, 28, 14, 56, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 28, 18, 12, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 5,
                             IsCorrect = false,
                             QuestionId = 1,
@@ -733,7 +748,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 27,
-                            AnsweredAt = new DateTime(2025, 6, 28, 14, 39, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 28, 17, 55, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 5,
                             IsCorrect = false,
                             QuestionId = 2,
@@ -743,7 +758,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 28,
-                            AnsweredAt = new DateTime(2025, 6, 28, 14, 55, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 28, 18, 11, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 5,
                             IsCorrect = true,
                             QuestionId = 3,
@@ -753,7 +768,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 29,
-                            AnsweredAt = new DateTime(2025, 6, 28, 14, 54, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 28, 18, 10, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 5,
                             IsCorrect = true,
                             QuestionId = 4,
@@ -763,7 +778,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 30,
-                            AnsweredAt = new DateTime(2025, 6, 28, 15, 1, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 28, 18, 17, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 5,
                             IsCorrect = false,
                             QuestionId = 5,
@@ -773,7 +788,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 46,
-                            AnsweredAt = new DateTime(2025, 6, 28, 19, 43, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 28, 22, 59, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 9,
                             IsCorrect = true,
                             QuestionId = 1,
@@ -783,7 +798,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 47,
-                            AnsweredAt = new DateTime(2025, 6, 28, 19, 58, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 28, 23, 14, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 9,
                             IsCorrect = true,
                             QuestionId = 2,
@@ -793,7 +808,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 48,
-                            AnsweredAt = new DateTime(2025, 6, 28, 20, 4, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 28, 23, 20, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 9,
                             IsCorrect = false,
                             QuestionId = 3,
@@ -803,7 +818,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 49,
-                            AnsweredAt = new DateTime(2025, 6, 28, 20, 0, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 28, 23, 16, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 9,
                             IsCorrect = true,
                             QuestionId = 4,
@@ -813,7 +828,7 @@ namespace lmsarnatask.Migrations
                         new
                         {
                             Id = 50,
-                            AnsweredAt = new DateTime(2025, 6, 28, 19, 38, 10, 204, DateTimeKind.Utc).AddTicks(2450),
+                            AnsweredAt = new DateTime(2025, 6, 28, 22, 54, 5, 305, DateTimeKind.Utc).AddTicks(1300),
                             AssignmentProgressId = 9,
                             IsCorrect = false,
                             QuestionId = 5,
@@ -884,7 +899,7 @@ namespace lmsarnatask.Migrations
                     b.HasOne("lms_arna_task.Models.Question", "Question")
                         .WithMany("UserAnswers")
                         .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("lms_arna_task.Models.User", "User")

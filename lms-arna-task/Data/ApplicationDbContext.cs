@@ -64,7 +64,7 @@ namespace lms_arna_task.Data
                 .HasOne(ua => ua.Question)
                 .WithMany(q => q.UserAnswers)
                 .HasForeignKey(ua => ua.QuestionId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<UserAnswer>()
                 .HasOne(ua => ua.AssignmentProgress)
