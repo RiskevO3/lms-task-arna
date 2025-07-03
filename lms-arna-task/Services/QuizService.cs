@@ -1,4 +1,5 @@
 using lms_arna_task.Models;
+using lms_arna_task.DTOs;
 using lms_arna_task.Services.Interfaces;
 using lms_arna_task.Repositories.Interfaces;
 
@@ -54,7 +55,7 @@ namespace lms_arna_task.Services
             return await _quizRepository.CalculateScoreAsync(assignmentId, answers);
         }
 
-        public async Task<UserAnswerDetailsDto?> GetUserAnswerDetailsAsync(int userId, int assignmentId)
+        public async Task<UserAnswerDetails?> GetUserAnswerDetailsAsync(int userId, int assignmentId)
         {
             return await _quizRepository.GetUserAnswerDetailsAsync(userId, assignmentId);
         }

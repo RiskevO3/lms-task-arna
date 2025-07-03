@@ -1,11 +1,12 @@
 using lms_arna_task.Models;
+using lms_arna_task.DTOs;
 
 namespace lms_arna_task.Repositories.Interfaces
 {
     public interface IQuizRepository
     {
-        Task<IEnumerable<ProgressReportDto>> GetProgressReportAsync();
-        Task<UserAnswerDetailsDto?> GetUserAnswerDetailsAsync(int userId, int assignmentId);
+        Task<IEnumerable<ProgressReport>> GetProgressReportAsync();
+        Task<UserAnswerDetails?> GetUserAnswerDetailsAsync(int userId, int assignmentId);
         Task<AssignmentProgress?> GetUserProgressAsync(int userId, int assignmentId);
         Task<List<AssignmentProgress>> GetAllUserProgressAsync(int userId);
         Task<AssignmentProgress> StartAssignmentAsync(int userId, int assignmentId);

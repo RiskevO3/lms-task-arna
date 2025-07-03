@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace lms_arna_task.Models
+namespace lms_arna_task.DTOs
 {
-    public class UserAnswerDetailsDto
+    public class UserAnswerDetails
     {
         public string UserName { get; set; } = string.Empty;
         public string UserEmail { get; set; } = string.Empty;
@@ -12,6 +12,6 @@ namespace lms_arna_task.Models
         public DateTime? CompletedAt { get; set; }
         public int TotalQuestions { get; set; }
         public int CorrectAnswers { get; set; }
-        public List<QuestionDetailDto> Answers { get; set; } = new();
+        public List<QuestionDetail> Answers { get; set; } = new();
     }
 }

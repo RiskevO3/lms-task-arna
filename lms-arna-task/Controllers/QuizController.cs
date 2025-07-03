@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using lms_arna_task.Services.Interfaces;
+using lms_arna_task.DTOs;
 using System.Security.Claims;
 
 namespace lms_arna_task.Controllers
@@ -76,7 +77,7 @@ namespace lms_arna_task.Controllers
             var report = await _quizService.GetProgressReportAsync(managerId);
 
             // Convert to simplified DTO to avoid circular references
-            var reportDto = report.Select(p => new lms_arna_task.Models.ProgressReportDto
+            var reportDto = report.Select(p => new ProgressReport
             {
                 Id = p.Id,
                 UserId = p.UserId,

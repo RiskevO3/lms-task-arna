@@ -1,6 +1,6 @@
-namespace lms_arna_task.Models
+namespace lms_arna_task.DTOs
 {
-    public class QuestionDetailDto
+    public class QuestionDetail
     {
         public string? QuestionText { get; set; }
         public string[]? Options { get; set; }

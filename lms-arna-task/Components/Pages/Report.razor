@@ -1,6 +1,7 @@
 @page "/report"
 @using System.Text.Json
 @using lms_arna_task.Models
+@using lms_arna_task.DTOs
 @inject HttpClient Http
 @inject NavigationManager Navigation
 
@@ -205,7 +206,7 @@
 </div>
 
 @code {
-    private List<ProgressReportDto>? progressList;
+    private List<ProgressReport>? progressList;
     private bool isLoading = true;
 
     protected override async Task OnInitializedAsync()
@@ -225,7 +226,7 @@
                 var content = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"Raw API response: {content}");
 
-                progressList = JsonSerializer.Deserialize<List<ProgressReportDto>>(content, new JsonSerializerOptions
+                progressList = JsonSerializer.Deserialize<List<ProgressReport>>(content, new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 });

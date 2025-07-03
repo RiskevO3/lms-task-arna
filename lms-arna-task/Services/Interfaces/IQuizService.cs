@@ -1,4 +1,5 @@
 using lms_arna_task.Models;
+using lms_arna_task.DTOs;
 
 namespace lms_arna_task.Services.Interfaces
 {
@@ -11,6 +12,6 @@ namespace lms_arna_task.Services.Interfaces
         Task<List<AssignmentProgress>> GetProgressReportAsync(int managerId);
         Task<bool> HasUserCompletedAssignmentAsync(int userId, int assignmentId);
         Task<int> CalculateScoreAsync(int assignmentId, Dictionary<int, string> answers);
-        Task<UserAnswerDetailsDto?> GetUserAnswerDetailsAsync(int userId, int assignmentId);
+        Task<UserAnswerDetails?> GetUserAnswerDetailsAsync(int userId, int assignmentId);
     }
 }

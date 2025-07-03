@@ -1,6 +1,6 @@
-namespace lms_arna_task.Models
+namespace lms_arna_task.DTOs
 {
-    public class ProgressReportDto
+    public class ProgressReport
     {
         public int Id { get; set; }
         public int UserId { get; set; }

@@ -1,5 +1,6 @@
 using lms_arna_task.Data;
 using lms_arna_task.Models;
+using lms_arna_task.DTOs;
 using lms_arna_task.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,12 +15,12 @@ namespace lms_arna_task.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<ProgressReportDto>> GetProgressReportAsync()
+        public async Task<IEnumerable<ProgressReport>> GetProgressReportAsync()
         {
             return await _context.AssignmentProgresses
                 .Include(p => p.User)
                 .Include(p => p.Assignment)
-                .Select(p => new ProgressReportDto
+                .Select(p => new ProgressReport
                 {
                     UserId = p.UserId,
                     Username = p.User.Username,
@@ -36,7 +37,7 @@ namespace lms_arna_task.Repositories
                 .ToListAsync();
         }
 
-        public async Task<UserAnswerDetailsDto?> GetUserAnswerDetailsAsync(int userId, int assignmentId)
+        public async Task<UserAnswerDetails?> GetUserAnswerDetailsAsync(int userId, int assignmentId)
         {
             var assignmentProgress = await _context.AssignmentProgresses
                 .Include(ap => ap.User)
@@ -53,7 +54,7 @@ namespace lms_arna_task.Repositories
                 .Include(ua => ua.Question)
                 .ToListAsync();
 
-            var questionDetails = userAnswers.Select(ua => new QuestionDetailDto
+            var questionDetails = userAnswers.Select(ua => new QuestionDetail
             {
                 QuestionText = ua.Question.QuestionText,
                 Options = new[] { ua.Question.OptionA, ua.Question.OptionB, ua.Question.OptionC, ua.Question.OptionD },
@@ -62,7 +63,7 @@ namespace lms_arna_task.Repositories
                 IsCorrect = ua.IsCorrect
             }).ToList();
 
-            return new UserAnswerDetailsDto
+            return new UserAnswerDetails
             {
                 UserName = assignmentProgress.User.Username,
                 UserEmail = assignmentProgress.User.Email,
